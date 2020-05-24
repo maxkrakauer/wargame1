@@ -10,8 +10,9 @@
 #include "DemoGame.hpp"
 #include "FootSoldier.hpp"
 #include "FootCommander.hpp"
-
+#include <iostream>
 #include <cassert>
+using namespace std;
 
 namespace WarGame {
 
@@ -34,7 +35,9 @@ namespace WarGame {
 		}
 
 		uint DemoGame::play() {
+			//cout<<"start of play"<<endl;
 			board.move(1, {0,1}, Board::MoveDIR::Up);      // FootSoldier of player 1 moves forward and attacks.
+			//cout<<"after first move"<<endl;
 			if (!board.has_soldiers(2)) return 1;
 
 			board.move(2, {7,1}, Board::MoveDIR::Down);    // FootSoldier of player 2 moves forward and attacks.
@@ -49,6 +52,7 @@ namespace WarGame {
 			/// Write more moves here..
 
 			// If no player won, return "tie":
+			//cout<<"end of play"<<endl;
 			return 0;
 		}
 }
