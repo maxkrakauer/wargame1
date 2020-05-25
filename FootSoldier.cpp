@@ -7,7 +7,7 @@
 
 
    
-   void FootSoldier::attack(Soldier* soldier){
+   void FootSoldier::act(Soldier* soldier){
        reduce(soldier);
    }
 

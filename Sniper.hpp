@@ -3,11 +3,11 @@
 #include "Soldier.hpp"
 
 
-class FootSoldier: public Soldier{
+class Sniper: public Soldier{
 
    public: 
-   FootSoldier(int player):Soldier(player){
-      _soltype=footer;
+   Sniper(int player):Soldier(player){
+      _soltype=sniper;
       _points=100;
    }
 
@@ -16,5 +16,6 @@ class FootSoldier: public Soldier{
    void reduce(Soldier* soldier);
 
    void recover();
+
 
 };

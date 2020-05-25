@@ -7,9 +7,10 @@ class FootCommander: public FootSoldier{
     public:
     FootCommander(int player): FootSoldier(player){
         _soltype=footcom;
+        _points=150;
     }
 
-   void attack(Soldier* soldier);
+   void act(Soldier* soldier);
 
    void reduce(Soldier* soldier);
 

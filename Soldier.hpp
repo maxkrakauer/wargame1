@@ -4,7 +4,8 @@
     class Soldier{
 
         public:
-        enum soltype {soldier, footcom, footer};
+        enum soltype {soldier, footcom, footer, 
+        sniper, snipercom, paramedic, paracom};
 
         
         public:
@@ -22,7 +23,7 @@
 
         public:
 
-        virtual void attack(Soldier* soldier){};
+        virtual void act(Soldier* soldier){};
 
         virtual void reduce(Soldier* soldier){};
 

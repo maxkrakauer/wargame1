@@ -47,6 +47,7 @@ namespace WarGame{
         int s=source.second;
         Soldier* temp;
         temp=this->board[f][s];
+        cout<<board[f][s]->_player<<endl;
         if(temp==nullptr ||
          this->board[f][s]->_player!=player_number){ 
             throw "wrong player";
@@ -135,7 +136,7 @@ namespace WarGame{
         {
             place.first=location.first+1;
             place.second=location.second;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -149,7 +150,7 @@ namespace WarGame{
         {
             place.first=location.first-1;
             place.second=location.second;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
               if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -164,7 +165,7 @@ namespace WarGame{
         {
             place.first=location.first;
             place.second=location.second+1;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -178,7 +179,7 @@ namespace WarGame{
         {
             place.first=location.first;
             place.second=location.second-1;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -200,7 +201,9 @@ namespace WarGame{
 
         cout<<"after soldier = this->board[location.first][location.second];"<<endl;
 
-        if(soldier!=NULL && soldier->_soltype==Soldier::soltype::footcom){
+        if(soldier!=NULL && (soldier->_soltype==Soldier::soltype::footcom ||
+        soldier->_soltype==Soldier::soltype::paracom || 
+        soldier->_soltype==Soldier::soltype::snipercom)){
             cout<<"soldier->_soltype==Soldier::soltype::footcom"<<endl;
 
             for(int i=0; i<board.size(); i++)
@@ -208,7 +211,16 @@ namespace WarGame{
                 location.first=i;
                 location.second=j;
                 if(this->board[location.first][location.second]!=nullptr && 
-                this->board[location.first][location.second]->_player==player_number){
+                this->board[location.first][location.second]->_player==player_number &&
+                (
+                    (soldier->_soltype==Soldier::soltype::footcom && 
+                board[i][j]->_soltype==Soldier::soltype::footer) ||
+                    (soldier->_soltype==Soldier::soltype::snipercom && 
+                board[i][j]->_soltype==Soldier::soltype::sniper) ||
+                    (soldier->_soltype==Soldier::soltype::paracom && 
+                board[i][j]->_soltype==Soldier::soltype::paramedic) 
+                )
+                ){
 
 
 
@@ -249,7 +261,7 @@ namespace WarGame{
         {
             place.first=location.first+1;
             place.second=location.second;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -263,7 +275,7 @@ namespace WarGame{
         {
             place.first=location.first-1;
             place.second=location.second;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -277,7 +289,7 @@ namespace WarGame{
         {
             place.first=location.first;
             place.second=location.second+1;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
@@ -291,7 +303,7 @@ namespace WarGame{
         {
             place.first=location.first;
             place.second=location.second-1;
-            this->board[location.first][location.second]->attack(this->board[place.first][place.second]);
+            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
             if(this->board[place.first][place.second]->_points<=0){
                 this->board[place.first][place.second]=nullptr; 
             }
