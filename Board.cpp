@@ -36,7 +36,7 @@ namespace WarGame{
 
     void Board::move(uint player_number, std::pair<int,int> source, MoveDIR direction){
 
-        cout<<"start of move"<<endl;
+        //cout<<"start of move"<<endl;
    
         if(source.first<0 || source.first>board.size() ||
         source.second<0 || source.second>board[0].size())
@@ -47,7 +47,7 @@ namespace WarGame{
         int s=source.second;
         Soldier* temp;
         temp=this->board[f][s];
-        cout<<board[f][s]->_player<<endl;
+        //cout<<board[f][s]->_player<<endl;
         if(temp==nullptr ||
          this->board[f][s]->_player!=player_number){ 
             throw "wrong player";
@@ -57,30 +57,30 @@ namespace WarGame{
         std::pair<int,int> location;
         location.first=source.first;
         location.second=source.second;
-        cout<<"location's row is: "<<location.first<<", location's column is: "<<location.second<<endl;
+        //cout<<"location's row is: "<<location.first<<", location's column is: "<<location.second<<endl;
         if(direction==Up){
             location.first=source.first+1;
-            cout<<"direction is Up"<<endl;
+            //cout<<"direction is Up"<<endl;
         }
         else if(direction==Down){
             location.first=source.first-1;
-            cout<<"direction is Down"<<endl;
+            //cout<<"direction is Down"<<endl;
         }
         else if(direction==Right){
             location.second=source.second+1;
-            cout<<"direction is Right"<<endl;
+            //cout<<"direction is Right"<<endl;
         }
         else if(direction==Left){
             location.second=source.second-1;
-            cout<<"direction is Left"<<endl;
+            //cout<<"direction is Left"<<endl;
         }
 
         if(location.first<0 || location.first>board.size() ||
         location.second<0 || location.second>board[0].size())
         throw "out of bounds";
-        cout<<"location's row is: "<<location.first<<", location's column is: "<<location.second<<endl;
+        //cout<<"location's row is: "<<location.first<<", location's column is: "<<location.second<<endl;
         Soldier* soldier = this->board[location.first][location.second];
-        cout<<"before soldier==null"<<endl;
+        //cout<<"before soldier==null"<<endl;
         if(soldier!=NULL)
         throw "soldier there";
 
@@ -127,8 +127,8 @@ namespace WarGame{
         four=true;
     
 
-        cout<<"dir is: "<<dir<<endl;
-        cout<<"before dir==1"<<endl;
+        //cout<<"dir is: "<<dir<<endl;
+        //cout<<"before dir==1"<<endl;
 
         if(dir==1 && location.first+1<board.size() && 
         this->board[location.first+1][location.second]!=nullptr && 
@@ -141,6 +141,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"atacking upward"<<endl;
         }
 
 
@@ -155,6 +156,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"atacking downward"<<endl;
         }
 
 
@@ -170,6 +172,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"atacking to the right"<<endl;
         }
 
 
@@ -184,6 +187,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"atacking to the left"<<endl;
         }
 
 
@@ -195,16 +199,16 @@ namespace WarGame{
         
         }
 
-        cout<<"before soldier = this->board[location.first][location.second];"<<endl;
+        //cout<<"before soldier = this->board[location.first][location.second];"<<endl;
 
         soldier = this->board[location.first][location.second];
 
-        cout<<"after soldier = this->board[location.first][location.second];"<<endl;
+        //cout<<"after soldier = this->board[location.first][location.second];"<<endl;
 
         if(soldier!=NULL && (soldier->_soltype==Soldier::soltype::footcom ||
         soldier->_soltype==Soldier::soltype::paracom || 
         soldier->_soltype==Soldier::soltype::snipercom)){
-            cout<<"soldier->_soltype==Soldier::soltype::footcom"<<endl;
+            //cout<<"soldier->_soltype==Soldier::soltype::footcom"<<endl;
 
             for(int i=0; i<board.size(); i++)
             for(int j=0; j<board[0].size(); j++){
@@ -266,6 +270,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"private attacking upward"<<endl;
         }
 
 
@@ -280,6 +285,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"private attacking downward"<<endl;
         }
 
 
@@ -294,6 +300,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"private atacking to the right"<<endl;
         }
 
 
@@ -308,6 +315,7 @@ namespace WarGame{
                 this->board[place.first][place.second]=nullptr; 
             }
             chosen=true;
+            cout<<"private atacking to the left"<<endl;
         }
 
 
@@ -346,6 +354,12 @@ namespace WarGame{
             }
         }
         return hasSoldiers;
+    }
+
+    string nuller (Soldier* soldier){
+        if(soldier==NULL)
+        return "";
+        else return " ";
     }
 
 
